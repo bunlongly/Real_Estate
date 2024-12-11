@@ -8,6 +8,8 @@ services:
       MYSQL_DATABASE: real_estate # Database name
       MYSQL_USER: root # MySQL username
       MYSQL_PASSWORD: bunlong03 # MySQL password
+    ports:
+      - "3306:3306"
 
   web:
     build: . # Assuming you have a Dockerfile in the current directory
