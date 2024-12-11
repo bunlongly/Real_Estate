@@ -1,0 +1,23 @@
+services:
+  db:
+    image: mysql:8
+    volumes:
+      - mysql_data:/var/lib/mysql # Persist data
+    environment:
+      MYSQL_ROOT_PASSWORD: bunlong03 # Root password
+      MYSQL_DATABASE: real_estate # Database name
+      MYSQL_USER: root # MySQL username
+      MYSQL_PASSWORD: bunlong03 # MySQL password
+
+  web:
+    build: . # Assuming you have a Dockerfile in the current directory
+    command: python manage.py runserver 0.0.0.0:8000 # Run Django on all interfaces
+    volumes:
+      - .:/code # Mount your code into the container
+    ports:
+      - "8000:8000" # Expose port 8000
+    depends_on:
+      - db
+
+volumes:
+  mysql_data: # Define the volume for MySQL data persistence
